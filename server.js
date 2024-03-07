@@ -1,3 +1,5 @@
+//This is a server-main entry point of the application
+
 const express=require("express");
 const app=express();
 
