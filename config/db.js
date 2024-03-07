@@ -1,17 +1,12 @@
 const mongoose=require("mongoose");
 const dbConnect= async () => {
     try{
-        await mongoose.connect("mongodb+srv://bloguser:e56sv1KnTkbJDna7@blog.qdafngq.mongodb.net/?retryWrites=true&w=majority",
-        {
-            useCreateIndex:true,
-            useFindAndModify: true,
-            useNewUrlParser:true,
-            useUnifiedTopology:true,
+        await mongoose.connect(process.env.MONGO_URL,{
         });
         console.log("Connected to database");
     }
     catch(error){
-        console.log(`Error`);
+        console.log(error);
     }
 }
 module.exports=dbConnect;
