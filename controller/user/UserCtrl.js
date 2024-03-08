@@ -1,7 +1,7 @@
 const User = require("../../model/user/User");
 
 const UserRegusterCtrl=async (req,res)=>{
-    const userExist= await User.findOne({email:re?.body?.email});
+    const userExist= await User.findOne({email:req?.body?.email});
     if(userExist) throw new Error("Already in use");
     try {
     const user=await User.create({
