@@ -1,5 +1,6 @@
 const generateToken = require("../../config/token/generatetoken");
 const User = require("../../model/user/User");
+const expressAsyncHandler=require("express-async-handler");
 
 const UserRegusterCtrl=async (req,res)=>{
     // const userExist= await User.findOne({email:req?.body?.email});
@@ -35,5 +36,14 @@ const UserLoginCtrl=async (req,res)=>{
         res.json({message:"Your login is not valid"});
     }
 }
+const fetchUsersCtrl=expressAsyncHandler(async(req,res)=>{
+    try{
+        const users=await User.find({});
+        res.json(users);
+    }
+    catch(error){
+        res.json(error);
+    }
+})
 
-module.exports={UserRegusterCtrl,UserLoginCtrl};
+module.exports={UserRegusterCtrl,UserLoginCtrl,fetchUsersCtrl};
