@@ -100,7 +100,11 @@ const userSchema=new mongoose.Schema({
 })
 //it has two arguments
 
+userSchema.methods.isPasswordMatched= async function (enterpass){
+    return this.password===enterpass;
+};
 //we make model of a schema through
 const User=mongoose.model("User",userSchema);
+
 
 module.exports=User;//gotta export stuff for it to work
