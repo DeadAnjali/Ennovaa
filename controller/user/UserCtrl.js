@@ -1,6 +1,7 @@
 const generateToken = require("../../config/token/generatetoken");
 const User = require("../../model/user/User");
 const expressAsyncHandler=require("express-async-handler");
+const validMongoDbId = require("../utils/validateMongoDB");
 
 const UserRegusterCtrl=async (req,res)=>{
     // const userExist= await User.findOne({email:req?.body?.email});
@@ -46,4 +47,26 @@ const fetchUsersCtrl=expressAsyncHandler(async(req,res)=>{
     }
 })
 
-module.exports={UserRegusterCtrl,UserLoginCtrl,fetchUsersCtrl};
+const deleteUsersCtrl= expressAsyncHandler(async(req,res)=>{
+    const {id}=req.params;
+    validMongoDbId(id);
+    try {
+        const deletedUser= await User.findByIdAndDelete(id);
+        res.send(deletedUser);
+    } catch (error) {
+        res.json(error);
+    }
+})
+const fetchOneUser= expressAsyncHandler(async(req,res)=>{
+    const {id} =req.params;
+    validMongoDbId(id);
+    try{
+        const oneUser=await User.findById(id);
+        res.json(oneUser);
+    }
+    catch(error){
+        res.send(error);
+    }
+})
+
+module.exports={UserRegusterCtrl,UserLoginCtrl,fetchUsersCtrl,deleteUsersCtrl,fetchOneUser};
