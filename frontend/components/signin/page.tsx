@@ -3,7 +3,7 @@
 import Link from "next/link";
 import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Axios } from "axios";
+import axios from "axios";
 
 export default function SignupPage() {
     const router = useRouter();
@@ -15,7 +15,13 @@ export default function SignupPage() {
     const [buttonDisabled, setButtonDisabled] = React.useState(false)
 
     const onSignup = async () => {
-
+        try{
+            const response = await axios.post("/route", user);
+            console.log("signup success", response.data);
+            router.push("/login");
+        }catch(error : any){
+            console.log("sign up failed", error.message)
+        }
     }
 
     useEffect(() => {
@@ -31,7 +37,7 @@ export default function SignupPage() {
             <h1>Signup</h1>
             <hr />
             <label htmlFor="username">username</label>
-            <input className="p-2 border border-seafoam rounded-lg mb-4 focus:outline-none focus:border-smoky"
+            <input className="p-2 border border-seafoam rounded-lg mb-4 focus:outline-none focus:border-smoky text-midnight"
                 id="username"
                 type="text"
                 value={user.username}
@@ -40,7 +46,7 @@ export default function SignupPage() {
             />
             <label htmlFor="email">email</label>
             <input
-                className="p-2 border border-seafoam rounded-lg mb-4 focus:outline-none focus:border-smoky"
+                className="p-2 border border-seafoam rounded-lg mb-4 focus:outline-none focus:border-smoky text-midnight"
                 id="email"
                 type="text"
                 value={user.email}
@@ -49,7 +55,7 @@ export default function SignupPage() {
             />
             <label htmlFor="password">password</label>
             <input
-                className="p-2 border border-seafoam rounded-lg mb-4 focus:outline-none focus:border-smoky"
+                className="p-2 border border-seafoam rounded-lg mb-4 focus:outline-none focus:border-smoky text-midnight"
                 id="passwords"
                 type="password"
                 value={user.password}
@@ -58,9 +64,9 @@ export default function SignupPage() {
             />
             <button
                 onClick={onSignup}
-                className="p-2 border border-seafoam rounded-lg mb-4 focus:outline-none focus:border-smoky">
-                    {buttonDisabled ? "no signup" : "sign up"}
-                    </button>
+                className="p-2 border border-seafoam rounded-lg mb-4 focus:outline-none focus:border-smoky text-midnight">
+                {buttonDisabled ? "no signup" : "sign up"}
+            </button>
             <Link href="/login">visit login page</Link>
         </div>
     )

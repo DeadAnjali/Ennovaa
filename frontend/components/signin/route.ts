@@ -17,6 +17,23 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({error: "user already exist"}, {status: 400})
         }
 
+        const salt await bcryptjs.genSalt(10)
+        const hashPassword = await bcryptjs.hash(passsword, salt)
+
+        const newUser = new User({
+            username,
+            email,
+            passsword : hashPassword
+        })
+
+        const savedUser = await newUser.save();
+
+        return NextResponse.json({
+            message : "user created succesfully",
+            success : true,
+            savedUser
+        })
+
     }catch(error: any){
         return NextResponse.json({error: error.message},{status: 500})
     }
