@@ -6,6 +6,9 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Room from "./Room";
 
 import Home from "@/components/Home/HomePage";
+import LoginPage from "@/components/login/page";
+import SignupPage from "@/components/signup/page";
+import {BrowserRouter, Route, Router, Routes} from 'react-router-dom'
 
 export const metadata = {
   title: "Ennovaaa",
@@ -25,7 +28,9 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => (
       {/* <Room>
         <TooltipProvider>{children}</TooltipProvider>
       </Room> */}
-      <Home />
+      {/* <Home /> */}
+      {/* <LoginPage /> */}
+      <SignupPage />
     </body>
   </html>
 );

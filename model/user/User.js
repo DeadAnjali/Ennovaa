@@ -6,7 +6,7 @@ const userSchema=new mongoose.Schema({
         type:String,
     },
     lastName:{
-        required:[true,"Last name is required"],
+        // required:[true,"Last name is required"],
         type:String,
     },
     profilePhoto:{

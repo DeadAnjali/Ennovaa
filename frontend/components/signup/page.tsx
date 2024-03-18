@@ -10,13 +10,15 @@ export default function SignupPage() {
     const [user, setUser] = React.useState({
         email: "",
         password: "",
-        username: "",
+        firstName: "",
     })
+
     const [buttonDisabled, setButtonDisabled] = React.useState(false)
 
     const onSignup = async () => {
+        console.log("function working....")
         try{
-            const response = await axios.post("/route", user);
+            const response = await axios.post("http://localhost:5000/api/users/register", user);
             console.log("signup success", response.data);
             router.push("/login");
         }catch(error : any){
@@ -25,7 +27,7 @@ export default function SignupPage() {
     }
 
     useEffect(() => {
-        if (user.email.length > 0 && user.password.length > 0 && user.username.length > 0) {
+        if (user.email.length > 0 && user.password.length > 0 && user.firstName.length > 0) {
             setButtonDisabled(false);
         } else {
             setButtonDisabled(true);
@@ -40,8 +42,8 @@ export default function SignupPage() {
             <input className="p-2 border border-seafoam rounded-lg mb-4 focus:outline-none focus:border-smoky text-midnight"
                 id="username"
                 type="text"
-                value={user.username}
-                onChange={(e) => setUser({ ...user, username: e.target.value })}
+                value={user.firstName}
+                onChange={(e) => setUser({ ...user, firstName: e.target.value })}
                 placeholder="username"
             />
             <label htmlFor="email">email</label>
@@ -53,6 +55,7 @@ export default function SignupPage() {
                 onChange={(e) => setUser({ ...user, email: e.target.value })}
                 placeholder="email"
             />
+          
             <label htmlFor="password">password</label>
             <input
                 className="p-2 border border-seafoam rounded-lg mb-4 focus:outline-none focus:border-smoky text-midnight"
@@ -64,8 +67,8 @@ export default function SignupPage() {
             />
             <button
                 onClick={onSignup}
-                className="p-2 border border-seafoam rounded-lg mb-4 focus:outline-none focus:border-smoky text-midnight">
-                {buttonDisabled ? "no signup" : "sign up"}
+                className="p-2 border border-seafoam rounded-lg mb-4 focus:outline-none focus:border-smoky text-seafoam">
+                signup
             </button>
             <Link href="/login">visit login page</Link>
         </div>
