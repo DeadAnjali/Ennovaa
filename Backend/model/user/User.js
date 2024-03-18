@@ -1,4 +1,5 @@
-const mongoose=require("mongoose")
+const mongoose=require("mongoose");
+const bcrypt=require("bcrypt");
 
 const userSchema=new mongoose.Schema({
     firstName:{
@@ -99,6 +100,11 @@ const userSchema=new mongoose.Schema({
     timestamps:true,
 })
 //it has two arguments
+userSchema.pre("save",async function(next){
+    const salt=await bcrypt.genSalt(10);
+    this.password=await bcrypt.hash(this.password,salt);
+    next();
+})
 
 userSchema.methods.isPasswordMatched= async function (enterpass){
     return this.password===enterpass;
