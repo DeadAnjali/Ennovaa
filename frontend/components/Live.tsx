@@ -7,9 +7,9 @@ import useInterval from "@/hooks/useInterval";
 import { CursorMode, CursorState, Reaction, ReactionEvent } from "@/types/type";
 import { shortcuts } from "@/constants";
 
-import { Comments } from "../../../enovaa_frontend/components/comments/Comments";
-import { CursorChat, FlyingReaction, LiveCursors, ReactionSelector } from "../../../enovaa_frontend/components/index";
-import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuTrigger } from "../../../enovaa_frontend/components/ui/context-menu";
+import { Comments } from "../../frontend/components/comments/Comments";
+import { CursorChat, FlyingReaction, LiveCursors, ReactionSelector } from "../../frontend/components/index";
+import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuTrigger } from "../../frontend/components/ui/context-menu"
 
 type Props = {
   canvasRef: React.MutableRefObject<HTMLCanvasElement | null>;

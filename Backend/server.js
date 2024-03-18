@@ -13,8 +13,6 @@ const cors = require('cors');
 app.use(cors({
     origin: 'http://localhost:3000', // Replace with your frontend origin
     optionsSuccessStatus: 200 // Set to 200 to avoid issues with legacy browsers
-}));
-
 
 app.use(express.json());//this is a middleware used to communicate between request and response
 app.use("/api/users",userRoute);
